@@ -1,0 +1,238 @@
+
+START
+  ↓
+User visits website
+  ↓
+Is user logged in?
+  ├── NO → Visitor Flow
+  └── YES → Check User Role
+                    ↓
+        Is role Student / Franchise / Admin?
+            ├── Student → Student Portal Flow
+            ├── Franchise → Franchise Portal Flow
+            └── Admin → Admin Portal Flow
+
+
+
+
+Visitor Flow
+  ↓
+Select action:
+  ├── Show popup
+  ├── View Courses → Display Courses content
+  ├── View Study Centers → Display Locations
+  ├── Fill Admission Form → Submit → Send to Admin
+  ├── Apply for Franchise → Submit → Send to Admin
+  ├── View Gallery → Display Images/videos
+  └── can see licences or affiliation.
+  ↓
+END / Back to Home
+
+
+-------------------------------------------------------------------------------------------------------
+
+
+Student Portal
+
+Login as Student (admin will generate login credentials )
+  ↓
+Authentication successful?
+  ├── NO → Show Error → Retry
+  └── YES → Dashboard
+                ↓
+        Select action:
+          ├── View dashboard (course details, course duration, remaining course duration, upcoming exam, past exam, exam score, 
+	certificate issued, total fees remaing, fees paid, total late fee paid, fees payment date reminder)
+          ├── View Profile
+          ├── View Courses
+          │       └── Want new course?
+          │              ├── YES → Initiate Payment → Confirm → Add Course
+          │              └── NO
+          ├── Attend Exam → Start Exam → Submit → Save Result (print)
+          └── View Notifications (fees payment reminder, late fee, result, certification)
+	↓
+        Logout / END
+
+
+
+-------------------------------------------------------------------------------------------------------
+
+
+Franchise Portal
+
+Login as Franchise
+  ↓
+Authentication successful?
+  ├── NO → Show Error
+  └── YES → Dashboard
+                ↓
+        Select action:
+          ├── View Profile
+          ├── Request for course(s)
+          ├── Wallet (Main Wallet + SRB Wallet)
+          │       └── Request specific amount withdrawal/deposit→ Send to Admin
+          ├── Add Student Admission → Submit → Wait Approval
+          │
+          │       ↓
+          │   Admin Approval?
+          │       ├── NO → Show Rejected / Pending
+          │       └── YES → Proceed
+          │                     ↓
+          │          Deduct Wallet Balance (Main Wallet)
+          │                     ↓
+          │          Generate Registration Number
+          │                     ↓
+          │          Student Registered
+          │
+          ├── View Students
+          │       └── Approved?
+          │              ├── YES → Show Students
+          │              └── NO → Show Pending
+          ├── Send Exam Request
+          │       └── Admin Approval
+          │                  └── view exam credentials sent by admin
+          ├── View Student Payments
+          └── View Notifications
+  	↓
+         Logout / END
+
+
+
+-------------------------------------------------------------------------------------------------------
+
+
+Admin Portal
+
+Login as Admin
+  ↓
+Authentication successful?
+  ├── NO → Show Error
+  └── YES → Dashboard
+                ↓
+        Select action:
+          ├── Dashboard home page (count of total student, student with cleared fees, student with pending fees, total fees collected, total late fine collected, total course type, total course, total franchise)
+          ├── View Profile
+          ├── CRUD on POPUP
+          ├── CRUD on GALLERY
+          ├── View Profile
+          ├── Add/View/Update/Delete Course
+          ├── View Franchise Applications
+          │       └── Approve or Reject?
+          │              ├── Approve → Generate Franchise Code
+          │              └── Reject → Notify Franchise User
+          ├── Wallet deposit/withdraw Requests
+          │       └── Approve or Reject
+          ├── CRUD on Student
+          ├── Student Admissions
+          │       └── Approve → Generate Registration Number + generate student login credentials+deduct balance from franchise wallet
+          ├── Generate Registration Number (Format: FRANCHISE_CODE / COURSE_CODE / YEAR / RANDOM)
+          │     
+          ├── Manage Exams
+          │       │     CRUD Exam
+          │       ├── Approve Request
+          │       └── Generate exam credentials and sent to franchise
+          │       └── Generate Reports (print)
+          ├──  view Notifications (late fee collected, fee collected, admission, franchise request, course admision)
+          └──Licence CRUD
+                ↓
+         Logout / END
+
+
+
+
+
+course view format:
+COURSE_NAME:
+sem1:
+          *....
+          *....
+sem2:
+          *....
+          *....
+
+
+
+================================================
+
+Tech Stack & Requirements:
+Frontend: React.js / Next.js
+UI: Tailwind CSS + ShadCN UI / Daisy UI
+Backend: Node.js + Express.js
+Database: MongoDB with Mongoose
+Architecture: Microservices (modular and scalable design)
+API: REST / GraphQL (well-documented using Swagger/Postman)
+state management: React Redux, Redux Toolkit
+
+Authentication & Security:
+JWT + Refresh Tokens
+Google Authentication
+Role-Based Access Control (RBAC)
+Input validation (Joi/Zod)
+Rate limiting & API protection
+Secure password hashing (bcrypt)
+
+Performance & Infrastructure:
+Redis (caching + session handling)
+Dockerized services
+CI/CD pipeline (GitHub Actions)
+Nginx reverse proxy
+
+Payments:
+Razorpay integration
+Webhook handling for payment verification
+Invoice generation system
+
+Storage & Media:
+Cloudinary / AWS S3
+Structured file management system
+
+Notifications:
+Nodemailer (email notifications)
+In-app notification system
+
+Documents:
+	PDF generation for:
+	        Certificates
+	        Fee receipts
+	        Reports
+
+Testing:
+Jest + Supertest
+React Testing Library
+Minimum 80%+ coverage
+
+Logging & Monitoring:
+Winston / Pino logging
+Error tracking (Sentry)
+Admin activity logs
+
+UX & UI:
+Fully responsive (mobile-first)
+Clean dashboard UI
+Loading states & skeletons
+
+
+==========================================
+Folder Structure:
+
+──client
+|       |──public
+|       |──src
+|       |──components
+|       |──pages
+|       |──hooks (custom hooks)
+|       |──redux
+|       └──utils
+└──server
+        |──controllers
+        |──routes
+        |──services
+        |──models
+        |──validations (zod/joi)
+        |──config (ex:db, cloudinary)
+        |──middleware (error, auth,role must)
+        |──server.js/app.js
+        └──index.js
+
+
+student admission date will pick from input box

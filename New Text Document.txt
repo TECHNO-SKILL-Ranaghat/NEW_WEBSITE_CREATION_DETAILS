@@ -1,0 +1,54 @@
+website contain total 3 portal. Admin, student and franchise one more thing for visitor no need to login. but others Admin, student and franchise must login.
+
+visitor can view (no need to login):
+course,
+study center or franchise located,
+fill admission form,
+apply as franchise,
+galary
+
+
+
+student can (need to login):
+view profile,
+view registered course details and also able to see other courses,
+attend exam online or offline,
+view payment details for registered course,
+initiate payment for new course,
+notification system
+
+
+
+franchise can (need to login):
+view profile,
+have an wallet can make money request via admin,
+after admin admin approval wallet balance will adjust
+fill student admission form,
+see as registered students details after admin approval,
+send exam request,
+see student initiate payment for new course,
+notification system
+
+
+
+admin (need to login):
+view profile,
+Dashboard (count of applied student, accpeted student, registered student, )
+accept or reject money request from franchise,
+will accept or reject franchise application,
+receive student admission form via franchise or user fillup student admission form and after receive admin will approve or reject this details will store in accepted student
+from accepted student admin can generate registration number for student,
+initiate exam,
+random question,
+generate exam report,
+notification system
+
+
+Registration Number Example:
+
+FRANCHISE_CODE/COURSE_CODE/YEAR/RANDOM_NUMBER
+
+
+SRB balance is franchise commision on 3 month bootcamp per student
+
+

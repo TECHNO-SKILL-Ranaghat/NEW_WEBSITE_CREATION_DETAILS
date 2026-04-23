@@ -1,0 +1,382 @@
+res.json() 👇👇
+
+USERS (Auth Service)
+
+Handles login + roles (centralized)
+
+User {
+  _id
+  name
+  email
+  passwordHash
+  role: "admin" | "student" | "franchise"
+  phone
+  isActive
+  refreshToken
+  createdAt
+  updatedAt
+}
+
+
+
+=================================
+
+
+STUDENTS
+
+Student {
+  _id
+  userId (ref: User)
+
+  registrationNumber
+  franchiseId (ref: Franchise)
+
+  courses: [
+    {
+      courseId,
+      startDate,
+      endDate,
+      status: "active" | "completed"
+    }
+  ]
+
+  fees: {
+    total
+    paid
+    remaining
+  }
+
+  documents: {
+    photo
+    idProof
+  }
+
+  createdAt
+}
+
+
+=======================================
+
+FRANCHISE:
+Franchise {
+  _id
+  userId (ref: User)
+
+  franchiseCode
+  instituteName
+  ownerName
+  address
+
+  walletId
+
+  status: "pending" | "approved" | "rejected"
+
+  createdAt
+}
+
+==========================================
+
+WALLET
+
+Wallet {
+  _id
+  franchiseId
+
+  mainBalance
+  srbBalance
+
+  updatedAt
+}
+
+=====================================
+
+TRANSACTIONS
+
+Transaction {
+  _id
+  walletId
+
+  type: "credit" | "debit"
+  amount
+  reason
+
+  status: "pending" | "completed" | "failed"
+
+  createdAt
+}
+
+==========================================
+
+COURSES
+
+Course {
+  _id
+  name
+  code
+  duration
+
+  semesters: [
+    {
+      name: "Sem 1",
+      subjects: [String]
+    }
+  ]
+
+  fees
+
+  createdAt
+}
+
+
+============================================
+
+
+ADMISSIONS
+
+Admission {
+  _id
+  studentName
+  franchiseId
+  courseId
+
+  status: "pending" | "approved" | "rejected"
+
+  registrationNumber
+
+  createdAt
+}
+
+===========================================
+
+**PAYMENTS** 
+
+Payment*  {
+  _id
+  studentId
+  courseId
+
+  amount
+  method: "razorpay"
+
+  razorpayOrderId
+  razorpayPaymentId
+
+  status: "pending" | "success" | "failed"
+
+  createdAt
+}
+
+==============================================
+
+EXAMS
+
+Exam {
+  _id
+  courseId
+
+  title
+  questions: [
+    {
+      question
+      options: [String]
+      correctAnswer
+    }
+  ]
+
+  duration
+
+  createdAt
+}
+
+====================================================
+
+RESULTS
+Result {
+  _id
+  studentId
+  examId
+
+  score
+  passed
+
+  createdAt
+}
+
+===================================================
+
+NOTIFICATIONS
+Notification {
+  _id
+  userId
+
+  title
+  message
+
+  type: "fee" | "exam" | "result" | "system"
+
+  isRead
+
+  createdAt
+}
+
+==========================================
+
+GALLERY
+
+Gallery {
+  _id
+  type: "image" | "video"
+  url
+  title
+
+  createdAt
+}
+
+============================================
+
+POPUPS
+Popup {
+  _id
+  title
+  message| photos
+  isActive
+
+  createdAt
+}
+============================================
+
+BANNER
+Banner {
+  _id
+  title
+  message| photos
+  isActive
+
+  createdAt
+}
+
+===========================================
+
+LICENCES
+Licence {
+  _id
+  title
+  documentUrl
+  createdAt
+}
+
+=============================================
+
+
+
+
+
+payments part optional
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

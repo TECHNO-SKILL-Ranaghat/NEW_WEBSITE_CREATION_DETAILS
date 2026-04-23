@@ -1,0 +1,126 @@
+Use:
+
+/api/v1/
+
+
+=====================================
+
+AUTH APIs
+POST   /auth/register (franchise, visitor as student)
+POST   /auth/login  (franchise, student, admin)
+POST   /auth/refresh-token
+POST   /auth/logout  (franchise, student, admin)
+GET    /auth/google
+
+=====================================
+
+USER APIs
+GET    /users/me  (franchise, student, admin)
+PUT    /users/update   (franchise, student, admin)
+GET    /users/:id   (franchise, student, admin)
+
+=====================================
+
+STUDENT APIs
+GET    /students     (franchise, admin)
+GET    /students/:id     (franchise, student, admin)
+POST   /students   (franchise, visitor as student)
+PUT    /students/:id  (franchise, student)
+DELETE /students/:id    (admin)
+
+GET    /students/:id/dashboard  (student)
+GET    /students/:id/results    (student)
+
+
+=====================================
+
+FRANCHISE APIs
+POST   /franchise/apply (visitor as franchise)
+GET    /franchise  (admin)
+GET    /franchise/:id (admin, franchise after admin approval)
+PUT    /franchise/:id (admin, franchise)
+
+
+=====================================
+
+WALLET APIs
+GET    /wallet/:franchiseId  (franchise)
+POST   /wallet/withdraw   (admin)
+POST   /wallet/add   (admin)
+GET    /wallet/transactions     (franchise, admin)
+
+
+=====================================
+
+COURSE APIs
+GET    /courses   (franchise, visitor, student, admin)
+POST   /courses   (admin)
+PUT    /courses/:id 	(admin)
+DELETE /courses/:id   (admin)
+
+
+=====================================
+
+ADMISSION APIs
+POST   /admissions   (franchise, visitor as student)
+GET    /admissions    (franchise, admin, student after approved)
+PUT    /admissions/:id/approve   (admin)
+PUT    /admissions/:id/reject   (admin)
+
+=====================================
+
+PAYMENT APIs
+POST   /payments/create-order (franchise, student,admin)
+POST   /payments/verify   (franchise, student,admin)
+GET    /payments/:studentId   (student)
+
+=====================================
+
+EXAM APIs
+POST   /exams (admin)
+GET    /exams (franchise, student,admin)
+POST   /exams/:id/start  (franchise, student, admin)
+POST   /exams/:id/submit   (franchise, student, admin)
+
+=====================================
+
+RESULT APIs
+GET    /results/:studentId  (franchise, student, admin)
+
+=====================================
+
+NOTIFICATION APIs
+GET    /notifications  (franchise, student, admin)
+PUT    /notifications/:id/read
+
+=====================================
+
+GALLERY APIs
+GET    /gallery  (franchise, visitor, student, admin)
+POST   /gallery
+DELETE /gallery/:id
+
+=====================================
+
+POPUP APIs
+GET    /popup   (franchise, visitor, student, admin)
+POST   /popup  (admin)
+PUT    /popup/:id  (admin)
+DELETE /popup/:id   (admin)
+
+=====================================
+
+Banner APIs
+GET    /popup   (franchise, visitor, student, admin)
+POST   /popup  (admin)
+PUT    /popup/:id  (admin)
+DELETE /popup/:id   (admin)
+
+=====================================
+
+LICENCE APIs
+GET    /licence    (franchise, visitor, student, admin)
+POST   /licence  (admin)
+DELETE /licence/:id   (admin)
+
+=====================================
