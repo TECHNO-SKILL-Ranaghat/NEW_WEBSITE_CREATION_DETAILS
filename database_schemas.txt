@@ -1,21 +1,28 @@
-res.json() 👇👇
+
 
 USERS (Auth Service)
 
-Handles login + roles (centralized)
+const userSchema = new mongoose.Schema({
+  name: { type: String, required: true },
 
-User {
-  _id
-  name
-  email
-  passwordHash
-  role: "admin" | "student" | "franchise"
-  phone
-  isActive
-  refreshToken
-  createdAt
-  updatedAt
-}
+  email: { type: String, unique: true, index: true },
+  phone: { type: String, unique: true },
+
+  passwordHash: { type: String },
+
+  role: {
+    type: String,
+    enum: ["admin", "student", "franchise"],
+    required: true
+  },
+
+  isActive: { type: Boolean, default: true },
+
+  refreshToken: { type: String },
+
+  isDeleted: { type: Boolean, default: false }
+
+}, { timestamps: true });
 
 
 
@@ -24,69 +31,86 @@ User {
 
 STUDENTS
 
-Student {
-  _id
-  userId (ref: User)
+const studentSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", index: true },
 
-  registrationNumber
-  franchiseId (ref: Franchise)
+  registrationNumber: { type: String, unique: true, index: true },
 
-  courses: [
-    {
-      courseId,
-      startDate,
-      endDate,
-      status: "active" | "completed"
-    }
-  ]
-
-  fees: {
-    total
-    paid
-    remaining
-  }
+  franchiseId: { type: mongoose.Schema.Types.ObjectId, ref: "Franchise" },
 
   documents: {
-    photo
-    idProof
+    photo: String,
+    idProof: String
+  },
+
+  isDeleted: { type: Boolean, default: false }
+
+}, { timestamps: true });
+
+
+=======================================
+
+STUDENT COURSE (IMPORTANT)
+
+
+const studentCourseSchema = new mongoose.Schema({
+  studentId: { type: mongoose.Schema.Types.ObjectId, ref: "Student", index: true },
+  courseId: { type: mongoose.Schema.Types.ObjectId, ref: "Course" },
+
+  startDate: Date,
+  endDate: Date,
+
+  status: {
+    type: String,
+    enum: ["active", "completed", "dropped"],
+    default: "active"
   }
 
-  createdAt
-}
-
-
+}, { timestamps: true });
 
 =======================================
 
 
 FRANCHISE:
-Franchise {
-  _id
-  userId (ref: User)
-  franchiseCode
-  instituteName
-  ownerName
-  address
-  walletId
-  status: "pending" | "approved" | "rejected"
-  createdAt
-}
+const franchiseSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+
+  franchiseCode: { type: String, unique: true, index: true },
+
+  instituteName: String,
+  ownerName: String,
+
+  address: String,
+
+  status: {
+    type: String,
+    enum: ["pending", "approved", "rejected"],
+    default: "pending"
+  },
+
+  isDeleted: { type: Boolean, default: false }
+
+}, { timestamps: true });
 
 
 
 ==========================================
 
 
-WALLET
+WALLET (Multi-Type)
 
-Wallet {
-  _id
-  franchiseId
-  mainBalance
-  srbBalance
-  updatedAt
-}
+const walletSchema = new mongoose.Schema({
+  ownerId: { type: mongoose.Schema.Types.ObjectId, ref: "Franchise", index: true },
 
+  type: {
+    type: String,
+    enum: ["main", "srb"],
+    required: true
+  },
+
+  balance: { type: Number, default: 0 }
+
+}, { timestamps: true });
 
 
 =====================================
@@ -94,16 +118,30 @@ Wallet {
 
 TRANSACTIONS
 
-Transaction {
-  _id
-  walletId
-  type: "credit" | "debit"
-  amount
-  reason
-  status: "pending" | "completed" | "failed"
-  createdAt
-}
+const transactionSchema = new mongoose.Schema({
+  walletId: { type: mongoose.Schema.Types.ObjectId, ref: "Wallet", index: true },
 
+  type: {
+    type: String,
+    enum: ["credit", "debit"]
+  },
+
+  amount: Number,
+
+  source: {
+    type: String,
+    enum: ["payment", "admin", "refund", "admission"]
+  },
+
+  referenceId: mongoose.Schema.Types.ObjectId,
+
+  status: {
+    type: String,
+    enum: ["pending", "completed", "failed"],
+    default: "pending"
+  }
+
+}, { timestamps: true });
 
 
 ==========================================
@@ -111,20 +149,24 @@ Transaction {
 
 COURSES
 
-Course {
-  _id
-  name
-  code
-  duration
+const courseSchema = new mongoose.Schema({
+  name: String,
+  code: { type: String, unique: true },
+
+  duration: Number, // in months
+
   semesters: [
     {
-      name: "Sem 1",
+      name: String,
       subjects: [String]
     }
-  ]
-  fees
-  createdAt
-}
+  ],
+
+  fees: Number,
+
+  isDeleted: { type: Boolean, default: false }
+
+}, { timestamps: true });
 
 
 
@@ -133,15 +175,25 @@ Course {
 
 ADMISSIONS
 
-Admission {
-  _id
-  studentName
-  franchiseId
-  courseId
-  status: "pending" | "approved" | "rejected"
-  registrationNumber
-  createdAt
-}
+const admissionSchema = new mongoose.Schema({
+  studentId: { type: mongoose.Schema.Types.ObjectId, ref: "Student", default: null },
+
+  name: String,
+  email: String,
+  phone: String,
+
+  franchiseId: { type: mongoose.Schema.Types.ObjectId, ref: "Franchise" },
+  courseId: { type: mongoose.Schema.Types.ObjectId, ref: "Course" },
+
+  status: {
+    type: String,
+    enum: ["pending", "approved", "rejected"],
+    default: "pending"
+  },
+
+  registrationNumber: String
+
+}, { timestamps: true });
 
 
 
@@ -150,17 +202,28 @@ Admission {
 
 **PAYMENTS** 
 
-Payment*  {
-  _id
-  studentId
-  courseId
-  amount
-  method: "razorpay"
-  razorpayOrderId
-  razorpayPaymentId
-  status: "pending" | "success" | "failed"
-  createdAt
-}
+const paymentSchema = new mongoose.Schema({
+  studentId: { type: mongoose.Schema.Types.ObjectId, ref: "Student", index: true },
+
+  courseId: { type: mongoose.Schema.Types.ObjectId, ref: "Course" },
+
+  amount: Number,
+  currency: { type: String, default: "INR" },
+
+  method: { type: String, default: "razorpay" },
+
+  razorpayOrderId: String,
+  razorpayPaymentId: String,
+
+  status: {
+    type: String,
+    enum: ["pending", "success", "failed"],
+    default: "pending"
+  },
+
+  receiptUrl: String
+
+}, { timestamps: true });
 
 
 
@@ -169,51 +232,133 @@ Payment*  {
 
 EXAMS
 
-Exam {
-  _id
-  courseId
-  title
-  questions: [
-    {
-      question
-      options: [String]
-      correctAnswer
-    }
-  ]
-  duration
-  createdAt
-}
+const examSchema = new mongoose.Schema({
+  courseId: { type: mongoose.Schema.Types.ObjectId, ref: "Course" },
+  title: String,
+  duration: Number,
+  passingMarks: Number,
+  maxAttempts: Number
+
+}, { timestamps: true });
 
 
 
 ====================================================
 
 
-RESULTS
-Result {
-  _id
-  studentId
-  examId
-  score
-  passed
-  createdAt
-}
+QUESTION
 
+const questionSchema = new mongoose.Schema({
+  examId: { type: mongoose.Schema.Types.ObjectId, ref: "Exam", index: true },
+
+  question: String,
+
+  options: [String],
+
+  correctAnswer: String
+
+}, { timestamps: true });
+
+
+
+====================================================
+
+EXAM ATTEMPT
+
+const examAttemptSchema = new mongoose.Schema({
+  studentId: { type: mongoose.Schema.Types.ObjectId, ref: "Student" },
+  examId: { type: mongoose.Schema.Types.ObjectId, ref: "Exam" },
+
+  answers: [
+    {
+      questionId: mongoose.Schema.Types.ObjectId,
+      selectedAnswer: String,
+      isCorrect: Boolean
+    }
+  ],
+
+  score: Number,
+
+  status: {
+    type: String,
+    enum: ["started", "submitted"],
+    default: "started"
+  },
+
+  startedAt: Date,
+  submittedAt: Date
+
+}, { timestamps: true });
+
+
+===================================================
+
+Result
+
+const resultSchema = new mongoose.Schema({
+  studentId: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: "Student", 
+    index: true 
+  },
+
+  examId: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: "Exam",
+    index: true
+  },
+
+  attemptId: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: "ExamAttempt",
+    unique: true   // 🔥 IMPORTANT
+  },
+
+  score: Number,
+  totalMarks: Number,
+  percentage: Number,
+
+  passed: Boolean,
+  grade: String,
+
+  isLatest: { type: Boolean, default: true },
+
+  published: { 
+    type: Boolean, 
+    default: false
+  },
+
+  certificateUrl: String,
+
+  evaluatedAt: { type: Date, default: Date.now },
+
+  isDeleted: { type: Boolean, default: false }
+
+}, { timestamps: true });
+
+// 🔥 Fast queries
+resultSchema.index({ studentId: 1, examId: 1, isLatest: 1 });
 
 
 ===================================================
 
 
 NOTIFICATIONS
-Notification {
-  _id
-  userId
-  title
-  message
-  type: "fee" | "exam" | "result" | "system"
-  isRead
-  createdAt
-}
+
+const notificationSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", index: true },
+
+  title: String,
+  message: String,
+
+  type: {
+    type: String,
+    enum: ["fee", "exam", "result", "system"]
+  },
+
+  isRead: { type: Boolean, default: false }
+
+}, { timestamps: true });
 
 
 
@@ -222,27 +367,27 @@ Notification {
 
 GALLERY
 
-Gallery {
-  _id
-  type: "image" | "video"
-  url
-  title
-  createdAt
-}
+const gallerySchema = new mongoose.Schema({
+  type: { type: String, enum: ["image", "video"] },
 
+  url: String,
+  title: String
+
+}, { timestamps: true });
 
 
 ============================================
 
 
 POPUPS
-Popup {
-  _id
-  title
-  message| photos
-  isActive
-  createdAt
-}
+const popupSchema = new mongoose.Schema({
+  title: String,
+  message: String,
+  image: String,
+
+  isActive: { type: Boolean, default: true }
+
+}, { timestamps: true });
 
 
 
@@ -250,13 +395,14 @@ Popup {
 
 
 BANNER
-Banner {
-  _id
-  title
-  message| photos
-  isActive
-  createdAt
-}
+const bannerSchema = new mongoose.Schema({
+  title: String,
+  message: String,
+  image: String,
+
+  isActive: { type: Boolean, default: true }
+
+}, { timestamps: true });
 
 
 
@@ -264,12 +410,11 @@ Banner {
 
 
 LICENCES
-Licence {
-  _id
-  title
-  documentUrl
-  createdAt
-}
+const licenseSchema = new mongoose.Schema({
+  title: String,
+  documentUrl: String
+
+}, { timestamps: true });
 
 
 
