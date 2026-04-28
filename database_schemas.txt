@@ -55,57 +55,59 @@ Student {
 }
 
 
+
 =======================================
+
 
 FRANCHISE:
 Franchise {
   _id
   userId (ref: User)
-
   franchiseCode
   instituteName
   ownerName
   address
-
   walletId
-
   status: "pending" | "approved" | "rejected"
-
   createdAt
 }
 
+
+
 ==========================================
+
 
 WALLET
 
 Wallet {
   _id
   franchiseId
-
   mainBalance
   srbBalance
-
   updatedAt
 }
 
+
+
 =====================================
+
 
 TRANSACTIONS
 
 Transaction {
   _id
   walletId
-
   type: "credit" | "debit"
   amount
   reason
-
   status: "pending" | "completed" | "failed"
-
   createdAt
 }
 
+
+
 ==========================================
+
 
 COURSES
 
@@ -114,18 +116,16 @@ Course {
   name
   code
   duration
-
   semesters: [
     {
       name: "Sem 1",
       subjects: [String]
     }
   ]
-
   fees
-
   createdAt
 }
+
 
 
 ============================================
@@ -138,15 +138,15 @@ Admission {
   studentName
   franchiseId
   courseId
-
   status: "pending" | "approved" | "rejected"
-
   registrationNumber
-
   createdAt
 }
 
+
+
 ===========================================
+
 
 **PAYMENTS** 
 
@@ -154,26 +154,24 @@ Payment*  {
   _id
   studentId
   courseId
-
   amount
   method: "razorpay"
-
   razorpayOrderId
   razorpayPaymentId
-
   status: "pending" | "success" | "failed"
-
   createdAt
 }
 
+
+
 ==============================================
+
 
 EXAMS
 
 Exam {
   _id
   courseId
-
   title
   questions: [
     {
@@ -182,44 +180,45 @@ Exam {
       correctAnswer
     }
   ]
-
   duration
-
   createdAt
 }
 
+
+
 ====================================================
+
 
 RESULTS
 Result {
   _id
   studentId
   examId
-
   score
   passed
-
   createdAt
 }
 
+
+
 ===================================================
+
 
 NOTIFICATIONS
 Notification {
   _id
   userId
-
   title
   message
-
   type: "fee" | "exam" | "result" | "system"
-
   isRead
-
   createdAt
 }
 
+
+
 ==========================================
+
 
 GALLERY
 
@@ -228,11 +227,13 @@ Gallery {
   type: "image" | "video"
   url
   title
-
   createdAt
 }
 
+
+
 ============================================
+
 
 POPUPS
 Popup {
@@ -240,10 +241,13 @@ Popup {
   title
   message| photos
   isActive
-
   createdAt
 }
+
+
+
 ============================================
+
 
 BANNER
 Banner {
@@ -251,11 +255,13 @@ Banner {
   title
   message| photos
   isActive
-
   createdAt
 }
 
+
+
 ===========================================
+
 
 LICENCES
 Licence {
@@ -265,118 +271,11 @@ Licence {
   createdAt
 }
 
+
+
 =============================================
 
 
-
-
-
 payments part optional
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

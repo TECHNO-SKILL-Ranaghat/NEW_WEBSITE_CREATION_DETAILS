@@ -41,15 +41,16 @@ Authentication successful?
   └── YES → Dashboard
                 ↓
         Select action:
+          ├── Show popup
           ├── View dashboard (course details, course duration, remaining course duration, upcoming exam, past exam, exam score, 
-	certificate issued, total fees remaing, fees paid, total late fee paid, fees payment date reminder)
+	certificate issued, total fees remaing, fees paid, total late fee paid, fees payment date reminder and so on...)
           ├── View Profile
           ├── View Courses
           │       └── Want new course?
-          │              ├── YES → Initiate Payment → Confirm → Add Course
+          │              ├── YES → Choose course→ Initiate Payment → Confirm → Add Course
           │              └── NO
-          ├── Attend Exam → Start Exam → Submit → Save Result (print)
-          └── View Notifications (fees payment reminder, late fee, result, certification)
+          ├── Attend Exam → Start Exam → Submit → Result Out → Save/Print Result
+          └── View Notifications (fees payment reminder, fee pending + late fee added, result, certification and so on...)
 	↓
         Logout / END
 
@@ -71,7 +72,7 @@ Authentication successful?
           ├── Request for course(s)
           ├── Wallet (Main Wallet + SRB Wallet)
           │       └── Request specific amount withdrawal/deposit→ Send to Admin
-          ├── Add Student Admission → Submit → Wait Approval
+          ├── Add Student Admission → Submit → Wait for admin Approval
           │
           │       ↓
           │   Admin Approval?
@@ -110,7 +111,7 @@ Authentication successful?
   └── YES → Dashboard
                 ↓
         Select action:
-          ├── Dashboard home page (count of total student, student with cleared fees, student with pending fees, total fees collected, total late fine collected, total course type, total course, total franchise)
+          ├── Dashboard home page (count of total student, student with cleared fees, student with pending fees, total fees collected, total late fine collected, total course type, total course, total franchise and so on...)
           ├── View Profile
           ├── CRUD on POPUP
           ├── CRUD on GALLERY
@@ -132,7 +133,8 @@ Authentication successful?
           │       ├── Approve Request
           │       └── Generate exam credentials and sent to franchise
           │       └── Generate Reports (print)
-          ├──  view Notifications (late fee collected, fee collected, admission, franchise request, course admision)
+          ├──  view Notifications (late fee collected, fee collected, admission, franchise request, course admision and so on...)
+          ├──  send Notifications to student/ franchise
           └──Licence CRUD
                 ↓
          Logout / END
@@ -230,9 +232,10 @@ Folder Structure:
         |──models
         |──validations (zod/joi)
         |──config (ex:db, cloudinary)
-        |──middleware (error, auth,role must)
+        |──middleware (globalError, auth, role)
         |──server.js/app.js
         └──index.js
 
 
 student admission date will pick from input box
+google map location
