@@ -1,12 +1,22 @@
 // USERS (Auth Service)
 
 const userSchema = new mongoose.Schema({
-	name: { type: String, required: true },
+	name: {
+		type: String,
+		required: true
+	},
 
-	email: { type: String, unique: true, index: true },
-	phone: { type: String, unique: true },
+	email: {
+		type: String,
+		unique: true,
+		index: true		
+	},
+	phone: {
+		type: String,
+		unique: true		
+	},
 
-	passwordHash: { type: String },
+	password: { type: String },
 
 	role: {
 		type: String,
@@ -14,11 +24,19 @@ const userSchema = new mongoose.Schema({
 		required: true
 	},
 
-	isActive: { type: Boolean, default: true },
+	isActive: {
+		type: Boolean,
+		default: true
+	},
 
-	refreshToken: { type: String },
+	refreshToken: {
+		type: String
+	},
 
-	isDeleted: { type: Boolean, default: false }
+	isDeleted: {
+		type: Boolean,
+		default: false
+	}
 
 }, { timestamps: true });
 
@@ -27,18 +45,32 @@ const userSchema = new mongoose.Schema({
 // STUDENTS
 
 const studentSchema = new mongoose.Schema({
-	userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", index: true },
+	userId: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "User",
+		index: true
+	},
 
-	registrationNumber: { type: String, unique: true, index: true },
+	registrationNumber: {
+		type: String,
+		unique: true,
+		index: true
+	},
 
-	franchiseId: { type: mongoose.Schema.Types.ObjectId, ref: "Franchise" },
+	franchiseId: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "Franchise"
+	},
 
 	documents: {
 		photo: String,
 		idProof: String
 	},
 
-	isDeleted: { type: Boolean, default: false }
+	isDeleted: {
+		type: Boolean,
+		default: false		
+	}
 
 }, { timestamps: true });
 
@@ -47,8 +79,15 @@ const studentSchema = new mongoose.Schema({
 // STUDENT COURSE
 
 const studentCourseSchema = new mongoose.Schema({
-	studentId: { type: mongoose.Schema.Types.ObjectId, ref: "Student", index: true },
-	courseId: { type: mongoose.Schema.Types.ObjectId, ref: "Course" },
+	studentId: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "Student",
+		index: true
+	},
+	courseId: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "Course"
+	},
 
 	startDate: Date,
 	endDate: Date,
@@ -66,9 +105,16 @@ const studentCourseSchema = new mongoose.Schema({
 // FRANCHISE
 
 const franchiseSchema = new mongoose.Schema({
-	userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+	userId: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "User"
+	},
 
-	franchiseCode: { type: String, unique: true, index: true },
+	franchiseCode: {
+		type: String,
+		unique: true,
+		index: true
+	},
 
 	instituteName: String,
 	ownerName: String,
@@ -81,7 +127,10 @@ const franchiseSchema = new mongoose.Schema({
 		default: "pending"
 	},
 
-	isDeleted: { type: Boolean, default: false }
+	isDeleted: {
+		type: Boolean,
+		default: false
+	}
 
 }, { timestamps: true });
 
@@ -90,7 +139,11 @@ const franchiseSchema = new mongoose.Schema({
 // WALLET (Multi-Type)
 
 const walletSchema = new mongoose.Schema({
-	ownerId: { type: mongoose.Schema.Types.ObjectId, ref: "Franchise", index: true },
+	ownerId: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "Franchise",
+		index: true
+	},
 
 	type: {
 		type: String,
@@ -98,7 +151,10 @@ const walletSchema = new mongoose.Schema({
 		required: true
 	},
 
-	balance: { type: Number, default: 0 }
+	balance: {
+		type: Number,
+		default: 0
+	}
 
 }, { timestamps: true });
 
@@ -107,7 +163,11 @@ const walletSchema = new mongoose.Schema({
 // TRANSACTIONS
 
 const transactionSchema = new mongoose.Schema({
-	walletId: { type: mongoose.Schema.Types.ObjectId, ref: "Wallet", index: true },
+	walletId: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "Wallet",
+		index: true
+	},
 
 	type: {
 		type: String,
@@ -137,7 +197,10 @@ const transactionSchema = new mongoose.Schema({
 
 const courseSchema = new mongoose.Schema({
 	name: String,
-	code: { type: String, unique: true },
+	code: {
+		type: String,
+		unique: true
+	},
 
 	duration: Number, // in months
 
@@ -150,7 +213,10 @@ const courseSchema = new mongoose.Schema({
 
 	fees: Number,
 
-	isDeleted: { type: Boolean, default: false }
+	isDeleted: {
+		type: Boolean,
+		default: false
+	}
 
 }, { timestamps: true });
 
@@ -159,14 +225,24 @@ const courseSchema = new mongoose.Schema({
 // ADMISSIONS
 
 const admissionSchema = new mongoose.Schema({
-	studentId: { type: mongoose.Schema.Types.ObjectId, ref: "Student", default: null },
+	studentId: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "Student",
+		default: null
+	},
 
 	name: String,
 	email: String,
 	phone: String,
 
-	franchiseId: { type: mongoose.Schema.Types.ObjectId, ref: "Franchise" },
-	courseId: { type: mongoose.Schema.Types.ObjectId, ref: "Course" },
+	franchiseId: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "Franchise"
+	},
+	courseId: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "Course"
+	},
 
 	status: {
 		type: String,
@@ -183,14 +259,27 @@ const admissionSchema = new mongoose.Schema({
 // **PAYMENTS** 
 
 const paymentSchema = new mongoose.Schema({
-	studentId: { type: mongoose.Schema.Types.ObjectId, ref: "Student", index: true },
+	studentId: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "Student",
+		index: true
+	},
 
-	courseId: { type: mongoose.Schema.Types.ObjectId, ref: "Course" },
+	courseId: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "Course"
+	},
 
 	amount: Number,
-	currency: { type: String, default: "INR" },
+	currency: {
+		type: String,
+		default: "INR"
+	},
 
-	method: { type: String, default: "razorpay" },
+	method: {
+		type: String,
+		default: "razorpay"
+	},
 
 	razorpayOrderId: String,
 	razorpayPaymentId: String,
@@ -210,7 +299,10 @@ const paymentSchema = new mongoose.Schema({
 // EXAMS
 
 const examSchema = new mongoose.Schema({
-	courseId: { type: mongoose.Schema.Types.ObjectId, ref: "Course" },
+	courseId: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "Course"
+	},
 	title: String,
 	duration: Number,
 	passingMarks: Number,
@@ -223,7 +315,11 @@ const examSchema = new mongoose.Schema({
 // QUESTION
 
 const questionSchema = new mongoose.Schema({
-	examId: { type: mongoose.Schema.Types.ObjectId, ref: "Exam", index: true },
+	examId: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "Exam",
+		index: true
+	},
 
 	question: String,
 
@@ -238,8 +334,14 @@ const questionSchema = new mongoose.Schema({
 // EXAM ATTEMPT
 
 const examAttemptSchema = new mongoose.Schema({
-	studentId: { type: mongoose.Schema.Types.ObjectId, ref: "Student" },
-	examId: { type: mongoose.Schema.Types.ObjectId, ref: "Exam" },
+	studentId: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "Student"
+	},
+	examId: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "Exam"
+	},
 
 	answers: [
 		{
@@ -293,7 +395,10 @@ const resultSchema = new mongoose.Schema({
 	passed: Boolean,
 	grade: String,
 
-	isLatest: { type: Boolean, default: true },
+	isLatest: {
+		type: Boolean,
+		default: true 
+	},
 
 	published: {
 		type: Boolean,
@@ -302,9 +407,15 @@ const resultSchema = new mongoose.Schema({
 
 	certificateUrl: String,
 
-	evaluatedAt: { type: Date, default: Date.now },
+	evaluatedAt: {
+		type: Date,
+		default: Date.now 
+	},
 
-	isDeleted: { type: Boolean, default: false }
+	isDeleted: {
+		type: Boolean,
+		default: false
+	}
 
 }, { timestamps: true });
 
@@ -317,7 +428,11 @@ resultSchema.index({ studentId: 1, examId: 1, isLatest: 1 });
 // NOTIFICATIONS
 
 const notificationSchema = new mongoose.Schema({
-	userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", index: true },
+	userId: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "User",
+		index: true
+	},
 
 	title: String,
 	message: String,
@@ -327,7 +442,10 @@ const notificationSchema = new mongoose.Schema({
 		enum: ["fee", "exam", "result", "system"]
 	},
 
-	isRead: { type: Boolean, default: false }
+	isRead: {
+		type: Boolean,
+		default: false
+	}
 
 }, { timestamps: true });
 
@@ -336,7 +454,10 @@ const notificationSchema = new mongoose.Schema({
 // GALLERY
 
 const gallerySchema = new mongoose.Schema({
-	type: { type: String, enum: ["image", "video"] },
+	type: {
+		type: String,
+		enum: ["image", "video"]
+	},
 
 	url: String,
 	title: String
@@ -352,7 +473,10 @@ const popupSchema = new mongoose.Schema({
 	message: String,
 	image: String,
 
-	isActive: { type: Boolean, default: true }
+	isActive: {
+		type: Boolean,
+		default: true
+	}
 
 }, { timestamps: true });
 
@@ -365,7 +489,10 @@ const bannerSchema = new mongoose.Schema({
 	message: String,
 	image: String,
 
-	isActive: { type: Boolean, default: true }
+	isActive: {
+		type: Boolean,
+		default: true
+	}
 
 }, { timestamps: true });
 
@@ -384,5 +511,3 @@ const licenseSchema = new mongoose.Schema({
 
 
 // payments part optional
-
-

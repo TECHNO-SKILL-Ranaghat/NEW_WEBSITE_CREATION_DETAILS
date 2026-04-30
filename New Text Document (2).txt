@@ -158,7 +158,7 @@ sem2:
 
 Tech Stack & Requirements:
 Frontend: React.js / Next.js
-UI: Tailwind CSS + ShadCN UI / Daisy UI
+UI: Tailwind CSS + ShadCN UI
 Backend: Node.js + Express.js
 Database: MongoDB with Mongoose
 Architecture: Microservices (modular and scalable design)
@@ -213,6 +213,9 @@ Fully responsive (mobile-first)
 Clean dashboard UI
 Loading states & skeletons
 
+Typography:
+fonts: Google Fonts (Inter, Roboto, Poppins, others...)
+icons: Lucide React
 
 ==========================================
 Folder Structure:
