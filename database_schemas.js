@@ -9,11 +9,11 @@ const userSchema = new mongoose.Schema({
 	email: {
 		type: String,
 		unique: true,
-		index: true		
+		index: true
 	},
 	phone: {
 		type: String,
-		unique: true		
+		unique: true
 	},
 
 	password: { type: String },
@@ -69,7 +69,36 @@ const studentSchema = new mongoose.Schema({
 
 	isDeleted: {
 		type: Boolean,
-		default: false		
+		default: false
+	}
+
+}, { timestamps: true });
+
+
+// ==================================================================================
+// COURSES
+
+const courseSchema = new mongoose.Schema({
+	name: String,
+	code: {
+		type: String,
+		unique: true
+	},
+
+	duration: Number, // in months
+
+	semesters: [
+		{
+			name: String,
+			subjects: [String]
+		}
+	],
+
+	fees: Number,
+
+	isDeleted: {
+		type: Boolean,
+		default: false
 	}
 
 }, { timestamps: true });
@@ -178,44 +207,19 @@ const transactionSchema = new mongoose.Schema({
 
 	source: {
 		type: String,
-		enum: ["payment", "admin", "refund", "admission"]
+		enum: ["payment", "admin", "refund", "admission"],
+		required: true
 	},
 
-	referenceId: mongoose.Schema.Types.ObjectId,
-
+	referenceId: {
+		type: mongoose.Schema.Types.ObjectId,   // dynamic link
+		required: true
+		// transaction can be linked to a payment or admission fee, or admin manual adjustment
+	},
 	status: {
 		type: String,
 		enum: ["pending", "completed", "failed"],
 		default: "pending"
-	}
-
-}, { timestamps: true });
-
-
-// ==================================================================================
-// COURSES
-
-const courseSchema = new mongoose.Schema({
-	name: String,
-	code: {
-		type: String,
-		unique: true
-	},
-
-	duration: Number, // in months
-
-	semesters: [
-		{
-			name: String,
-			subjects: [String]
-		}
-	],
-
-	fees: Number,
-
-	isDeleted: {
-		type: Boolean,
-		default: false
 	}
 
 }, { timestamps: true });
@@ -397,7 +401,7 @@ const resultSchema = new mongoose.Schema({
 
 	isLatest: {
 		type: Boolean,
-		default: true 
+		default: true
 	},
 
 	published: {
@@ -409,7 +413,7 @@ const resultSchema = new mongoose.Schema({
 
 	evaluatedAt: {
 		type: Date,
-		default: Date.now 
+		default: Date.now
 	},
 
 	isDeleted: {
