@@ -235,10 +235,10 @@ Key collections and models expected:
 ## Testing
 
 - Backend tests: 
-pm test or 
-pm run test from server
+npm test or 
+npm run test from server
 - Frontend tests: 
-pm test from client
+npm test from client
 - Use Jest, Supertest, and React Testing Library for coverage targets
 
 ## Notes
