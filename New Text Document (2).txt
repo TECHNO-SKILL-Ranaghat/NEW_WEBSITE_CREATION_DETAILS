@@ -52,7 +52,7 @@ Authentication successful?
           ├── Attend Exam → Start Exam → Submit → Result Out → Save/Print Result
           └── View Notifications (fees payment reminder, fee pending + late fee added, result, certification and so on...)
 	↓
-        Logout / END
+Logout / END
 
 
 
@@ -94,8 +94,8 @@ Authentication successful?
           │                  └── view exam credentials sent by admin
           ├── View Student Payments
           └── View Notifications
-  	↓
-         Logout / END
+	↓
+Logout / END
 
 
 
@@ -136,8 +136,8 @@ Authentication successful?
           ├──  view Notifications (late fee collected, fee collected, admission, franchise request, course admision and so on...)
           ├──  send Notifications to student/ franchise
           └──Licence CRUD
-                ↓
-         Logout / END
+	↓
+Logout / END
 
 
 
