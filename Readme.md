@@ -214,7 +214,9 @@ Key collections and models expected:
 
 ## Setup Instructions
 
-1. Clone the repository.
+1. Push or Clone the repository.
+   -  https://github.com/TECHNO-SKILL-Ranaghat/AIYCEC_OFFICIAL
+      *push code everyday*
 2. Install dependencies separately for client and server:
    - cd client && npm install
    - cd server && npm install
