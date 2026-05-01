@@ -141,7 +141,7 @@ Logout / END
 
 
 
-
+Student/ Franchise can print application form after fillup
 
 course view format:
 COURSE_NAME:
