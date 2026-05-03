@@ -143,7 +143,7 @@ Logout / END
 
 Student/ Franchise can print application form after fillup
 
-SRB balance is franchise commision on 3 month bootcamp per student
+SRB balance is franchise commision on bootcamp per student
 
 
 student admission date will pick from input box
@@ -154,6 +154,7 @@ public portal must have google map location
 All date format: dd/mm/yyy
 
 course view format:
+
 COURSE_NAME:
 sem1:
     *....
