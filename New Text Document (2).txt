@@ -94,7 +94,7 @@ Authentication successful?
             │                  └── view exam credentials sent by admin
             ├── View Student Payments
             └── View Notifications
-	  ↓
+        ↓
 Logout / END
 
 
