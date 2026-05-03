@@ -68,32 +68,32 @@ Authentication successful?
     └── YES → Dashboard
                 ↓
         Select action:
-          ├── View Profile
-          ├── Request for course(s)
-          ├── Wallet (Main Wallet + SRB Wallet)
-          │       └── Request specific amount withdrawal/deposit→ Send to Admin
-          ├── Add Student Admission → Submit → Wait for admin Approval
-          │
-          │       ↓
-          │   Admin Approval?
-          │       ├── NO → Show Rejected / Pending
-          │       └── YES → Proceed
-          │                     ↓
-          │          Deduct Wallet Balance (Main Wallet)
-          │                     ↓
-          │          Generate Registration Number
-          │                     ↓
-          │          Student Registered
-          │
-          ├── View Students
-          │       └── Approved?
-          │              ├── YES → Show Students
-          │              └── NO → Show Pending
-          ├── Send Exam Request
-          │       └── Admin Approval
-          │                  └── view exam credentials sent by admin
-          ├── View Student Payments
-          └── View Notifications
+            ├── View Profile
+            ├── Request for course(s)
+            ├── Wallet (Main Wallet + SRB Wallet)
+            │       └── Request specific amount withdrawal/deposit→ Send to Admin
+            ├── Add Student Admission → Submit → Wait for admin Approval
+            │
+            │       ↓
+            │   Admin Approval?
+            │       ├── NO → Show Rejected / Pending
+            │       └── YES → Proceed
+            │                     ↓
+            │          Deduct Wallet Balance (Main Wallet)
+            │                     ↓
+            │          Generate Registration Number
+            │                     ↓
+            │          Student Registered
+            │
+            ├── View Students
+            │       └── Approved?
+            │              ├── YES → Show Students
+            │              └── NO → Show Pending
+            ├── Send Exam Request
+            │       └── Admin Approval
+            │                  └── view exam credentials sent by admin
+            ├── View Student Payments
+            └── View Notifications
 	  ↓
 Logout / END
 
