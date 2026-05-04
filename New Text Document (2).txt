@@ -21,7 +21,7 @@ Select action:
     ├── Show popup
     ├── View Courses → Display Courses content
     ├── View Study Centers → Display Locations
-    ├── Fill Admission Form → Submit → Send to Admin
+    ├── Fill Student Admission Form → Submit → Send to Admin
     ├── Apply for Franchise → Submit → Send to Admin
     ├── View Gallery → Display Images/videos
     └── can see licences or affiliation.
@@ -129,7 +129,7 @@ Authentication successful?
         	├── Generate Registration Number (Format: FRANCHISE_CODE / COURSE_CODE / YEAR / RANDOM)
         	│     
         	├── Manage Exams
-        	│       │     CRUD Exam
+        	│       ├── CRUD Exam
         	│       ├── Approve Request
         	│       └── Generate exam credentials and sent to franchise
         	│       └── Generate Reports (print)
