@@ -146,9 +146,134 @@ Student/ Franchise can print application form after fillup
 SRB balance is franchise commision on bootcamp per student
 
 
-student admission date will pick from input box
+**student admission date will pick from input box
 
-public portal must have google map location
+**public portal must have google map location
+
+
+
+
+
+
+
+student Registration or admission form fields:
+
+State (dropdown)
+District (dropdown)
+Study Centre (dropdown)
+Study Centre Address (textbox automatically show after select study center)
+
+Course Category (dropdown)
+Duration (dropdown)
+Course Name (dropdown)
+
+Name
+Father's Name
+Mother's Name
+Date of Birth (dd/mm/yyyy)
+Gender (dropdown)
+Contact Number
+Religion (dropdown)
+WhatsApp Number
+Category (dropdown)
+Marital Status (dropdown)
+Address
+Last Educational Qualification (dropdown)
+Enquiry Source (dropdown)
+Pin Code
+Identity Proof (dropdown)
+
+Passport Size Color Photo (file)
+Identity Proof Color Photo (file)
+
+Declaration (radio)
+
+
+_____________________________________________________________________________________________________________
+
+
+Student Verification:
+Registration No
+DOB (dd/mm/yyyy)
+
+
+
+
+_____________________________________________________________________________________________________________
+
+
+STUDENT LOGIN:
+Registration No
+password
+
+
+_____________________________________________________________________________________________________________
+
+
+
+Franchise Application or Request
+
+APPLICATION FORM FOR AFFILATION
+State (dropdown)
+District (dropdown)
+City
+
+
+Institute Information
+
+Name of the Institute
+Year of Establishment
+Status of The Institution
+Postal Address of the Institute
+P.O.
+P.S.
+Pin
+
+Institute Contact No
+
+Primary Mobile Number
+Alternative Mobile Number
+Email ID 
+
+Information About Centre Head
+
+Name of the Head
+Position Hold Centre
+Address of the Centre Head
+P.O.
+P.S.
+Pin
+Mobile
+Email of the Centre Head
+Date of Birth (dd/mm/yyyy)
+Gender (dropdown)
+Nationality
+Religion
+
+Available Infrastructure Facility of the Centre
+DOCUMENTS
+
+Color Passport Size Photo Of The Centre Head (file)
+Voter Card of The Institute Head (Both side in one page) (file)
+Pan Card Of The Institute Head (file)
+Trade License Of The Institute (file)
+Color Photograph Of Front Side Of The Institute (file)
+Color Photo Of Practical Room (file)
+Color Photo Of Theory Room (file)
+
+DECLARATION (radio)
+
+
+_____________________________________________________________________________________________________________
+
+
+Franchise Login:
+
+Center ID:
+password
+
+
+
 
 
 All date format: dd/mm/yyy
