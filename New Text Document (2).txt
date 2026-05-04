@@ -134,7 +134,7 @@ Authentication successful?
         	│       └── Generate Reports (print)
         	├──  view Notifications (late fee collected, fee collected, admission, franchise request, course admision and so on...)
         	├──  send Notifications to student/ franchise
-        	└──Licence CRUD
+        	└── Licence CRUD
 	  ↓
 Logout / END
 
