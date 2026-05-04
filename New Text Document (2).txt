@@ -160,7 +160,7 @@ student Registration or admission form fields:
 State (dropdown)
 District (dropdown)
 Study Centre (dropdown)
-Study Centre Address (textbox automatically show after select study center)
+Study Centre Address (textbox - value automatically show after select study center)
 
 Course Category (dropdown)
 Duration (dropdown)
@@ -195,8 +195,6 @@ ________________________________________________________________________________
 Student Verification:
 Registration No
 DOB (dd/mm/yyyy)
-
-
 
 
 _____________________________________________________________________________________________________________
@@ -273,12 +271,13 @@ Center ID:
 password
 
 
+_____________________________________________________________________________________________________________
 
 
 
 All date format: dd/mm/yyy
 
-course view format:
+course view format (visitor, franchise, student, admin):
 
 COURSE_NAME:
 sem1:
